@@ -1,6 +1,6 @@
 # TASKFLOW
 
-Aplicación para la gestion de tareas personales
+Aplicación para la gestión de tareas personales
 
 ## Tecnologías
 
