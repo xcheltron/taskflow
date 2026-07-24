@@ -6,7 +6,6 @@ export const projectCreateModel = async (
     color: string,
     userId: number
 ) => {
-    try {
         return await prisma.project.create({
             data: {
                 name: name,
@@ -15,7 +14,17 @@ export const projectCreateModel = async (
                 userId: userId
             }
         })        
-    } catch (error) {
-        return error
-    }
+    } 
+
+//traer todos los proyectos de una persona
+export const projectSearchModel = async (userId:number) => {
+    return await prisma.project.findMany({
+        where: {userId: userId},
+        select:{
+            id_project: true,
+            name: true,
+            description: true,
+            color: true
+        }
+    })
 }
