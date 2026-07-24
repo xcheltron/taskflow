@@ -13,3 +13,16 @@ export const createUserModel = async (
             }
         })
     }
+
+export const loginUserModel = async (
+    email: string
+) =>{
+    return await prisma.user.findFirst({
+        where: {email: email},
+        select: {
+            id: true,
+            name: true,
+            password: true
+        }
+    })
+}

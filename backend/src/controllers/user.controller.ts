@@ -1,5 +1,6 @@
 //importar model
 import { createUserModel } from "../models/user.model.js";
+import { loginUserModel } from "../models/user.model.js";
 import type { Request, Response } from "express";
 
 import bcrypt from "bcrypt"
