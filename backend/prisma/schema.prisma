@@ -12,10 +12,55 @@ datasource db {
   provider = "postgresql"
 }
 
+enum TaskStatus{
+  PENDING
+  COMPLETED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model User{
-  id         Int       @id @default(autoincrement())
-  email      String    @unique
-  password   String
-  name       String
-  createdAt  DateTime  @default(now())
+  id          Int       @id @default(autoincrement())
+  email       String    @unique
+  password    String
+  name        String
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  projects    Project[]
+}
+
+model Project {
+  id_project   Int      @id @default(autoincrement())
+  name         String
+  description  String?
+  color        String
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+
+  taks         Task[]
+}
+
+model Task {
+  id           Int        @id @default(autoincrement())
+  title        String
+  description  String?
+  status       TaskStatus @default(PENDING)
+  priority     Priority   @default(MEDIUM)
+  duedate      DateTime
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  projectId   Int
+  project      Project    @relation(fields: [projectId], references: [id_project])
 }
