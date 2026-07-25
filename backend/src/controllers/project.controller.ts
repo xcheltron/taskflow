@@ -1,6 +1,7 @@
 import { Result } from "pg";
 import { projectCreateModel } from "../models/project.model.js";
 import { projectSearchModel } from "../models/project.model.js";
+import { projectUpdateModel } from "../models/project.model.js";
 import  type { Request, Response} from "express"
 
 export const projectCreateController = async (
@@ -43,6 +44,43 @@ export const projectSearchController = async (
             result: result
         })
 
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({message: "Error interno del servidor"})
+    }
+}
+
+export const projectUpdateController = async (
+    req: Request,
+    res: Response
+) => {
+    try {
+        const id_project = Number(req.params.id)
+        const {name, description, color} = req.body
+
+        if (name == undefined && description == undefined && color == undefined){
+            return res.status(400).json({
+                message: "No se mandaron cambios"
+            })
+        }
+
+        if (isNaN(id_project)){
+            return res.status(400).json({
+                message: "id no valido"
+            })
+        }
+        const result = await projectUpdateModel(id_project, name, description, color)
+
+        if (!result){
+            return res.status(400).json({
+                message: "No se encontro el proyecto"
+            })
+        }
+
+        return res.status(200).json({
+            message: "Actualización pletada exitosamente",
+            result: result
+        })
     } catch (error) {
         console.error(error)
         return res.status(500).json({message: "Error interno del servidor"})
