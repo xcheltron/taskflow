@@ -60,3 +60,11 @@ export const projectUpdateModel = async (
         data
     })
 }
+
+export const projectDeleteModel = async (
+    id_project: number
+) =>{
+    return prisma.project.delete({
+        where: {id_project}
+    })
+}
