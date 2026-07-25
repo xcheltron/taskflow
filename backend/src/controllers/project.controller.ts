@@ -1,7 +1,8 @@
-import { Result } from "pg";
 import { projectCreateModel } from "../models/project.model.js";
 import { projectSearchModel } from "../models/project.model.js";
 import { projectUpdateModel } from "../models/project.model.js";
+import { projectDeleteModel } from "../models/project.model.js";
+
 import  type { Request, Response} from "express"
 
 export const projectCreateController = async (
@@ -84,5 +85,29 @@ export const projectUpdateController = async (
     } catch (error) {
         console.error(error)
         return res.status(500).json({message: "Error interno del servidor"})
+    }
+}
+
+export const projectDeleteController = async(
+    req: Request,
+    res: Response
+) => {
+    try {
+        const id_project = Number(req.params.id)
+
+        if (isNaN(id_project)){
+            return res.status(400).json({message: "id no valido"})
+        }
+
+        const result = await projectDeleteModel(id_project)
+
+        if(!result){
+            return res.status(400).json({message: "id no existe"})
+        }
+
+        res.status(200).json({message: "proyecto eliminado correctamente"})
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({message: "Error interno del servidor"})
     }
 }
