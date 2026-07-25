@@ -28,3 +28,35 @@ export const projectSearchModel = async (userId:number) => {
         }
     })
 }
+
+export const projectUpdateModel = async (
+    id_project: number,
+    name?: string,
+    description?: string,
+    color?: string
+) => {
+    const project = await prisma.project.findUnique({
+        where: {
+            id_project
+        }
+    });
+
+    if (!project) {
+        return null;
+    }
+
+    //creo un objeto data
+    const data : any = {}
+
+    //verifico que tengan informacion, si no, no los guardo en data y así solo actualizo la info nueva
+    if (name !== undefined) data.name = name
+    if (description !== undefined) data.description = description
+    if (color !== undefined) data.color = color
+
+    return await prisma.project.update({
+        where: {
+            id_project
+        },
+        data
+    })
+}
