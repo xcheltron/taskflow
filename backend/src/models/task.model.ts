@@ -65,3 +65,34 @@ export const taskFindProjectModel = async (
         }
     })
 }
+
+export const taskUpdateModel = async (
+    id: number,
+    title?: string,
+    description?: string,
+    status?: TaskStatus,
+    priority?: Priority,
+    duedate?: Date 
+) =>{
+    //verifiquemos que la tarea exista
+    const result = await prisma.task.findUnique({
+        where: {id}
+    })
+
+    if (!result) return null
+
+    //creamos el objeto de manera dinamica
+    const data : any = {}
+
+    if (title !== undefined) data.title = title
+    if (description !== undefined) data.description = description
+    if (status !== undefined) data.status = status
+    if (priority !== undefined) data.priority = priority
+    if (duedate !== undefined) data.duedate = duedate
+
+    return prisma.task.update({
+        where: {id},
+        data
+    })
+
+}
