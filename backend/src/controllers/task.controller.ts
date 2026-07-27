@@ -1,4 +1,4 @@
-import { taskCreateModel } from "../models/task.model.js";
+import { taskCreateModel, taskFindProjectModel } from "../models/task.model.js";
 
 import type { Request, Response } from "express";
 
@@ -20,3 +20,24 @@ export const taskCreateController = async (
         return res.status(500).json({message: "Error interno del servidor"})
     }
 } 
+
+export const taskFindProjectController = async (
+    req: Request,
+    res: Response
+) => {
+    try {
+        const projectId = Number(req.params.id)
+
+        if (!isNaN(projectId)){
+            return res.status(400).json({message: "Id de proyectono valido"})
+        }
+
+        const tasks = await taskFindProjectModel(projectId)
+
+        return res.status(200).json(tasks)
+
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({message: "Error interno del servidor"})
+    }    
+}
