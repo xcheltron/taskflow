@@ -11,7 +11,7 @@ export const taskCreateModel = async (
     projectId: number //verficar si exciste el proyecto
 ) =>{
     //primero comprobamos si existe el proyecto
-    const result = prisma.project.findUnique({
+    const result = await prisma.project.findUnique({
         where: {id_project: projectId}
     })
 
@@ -20,7 +20,7 @@ export const taskCreateModel = async (
     }
 
     //podemos crear manearas de comprobar los datos antes de agregarlos a la data
-    
+
     //crear un objeto tipo data 
     const data = {
         title,
