@@ -1,4 +1,4 @@
-import { taskCreateModel, taskFindProjectModel } from "../models/task.model.js";
+import { taskCreateModel, taskDeleteModel, taskFindProjectModel, taskUpdateModel } from "../models/task.model.js";
 
 import type { Request, Response } from "express";
 
@@ -28,7 +28,7 @@ export const taskFindProjectController = async (
     try {
         const projectId = Number(req.params.id)
 
-        if (!isNaN(projectId)){
+        if (isNaN(projectId)){
             return res.status(400).json({message: "Id de proyectono valido"})
         }
 
@@ -40,4 +40,50 @@ export const taskFindProjectController = async (
         console.error(error)
         return res.status(500).json({message: "Error interno del servidor"})
     }    
+}
+
+export const taskUpdateController = async (
+    req: Request,
+    res: Response
+) =>{
+    try {
+        const id = Number(req.params.id)
+        const { title, description, status, priority, duedate} = req.body
+
+        if (isNaN(id)){
+            return res.status(400).json({message: "Id no valido"})
+        }
+
+        const result = await taskUpdateModel(id, title, description, status, priority, duedate)
+
+        if(!result){
+            return res.status(400).json({message: "NO se realizo ninguna actualización, por favor compruebe la informacion"})
+        }
+
+        return res.status(200).json(result)
+
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({message: "Error interno del servidor"})
+    }
+} 
+
+export const taskDeleteController = async (
+    req: Request,
+    res: Response
+) =>{
+    try {
+        const id = Number(req.params.id)
+
+        if (isNaN(id)){
+            return res.status(400).json({message: "Id no valido"})
+        }
+
+        const result = await taskDeleteModel(id)
+
+        return res.status(200).json(result)    
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({message: "Error interno del servidor"})
+    }
 }
