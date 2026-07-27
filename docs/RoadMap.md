@@ -6,12 +6,12 @@
 - Login                             [x]
 - Register                          [x]
 - Crear projecto                    [x]  
-- Crear tarea                       []
+- Crear tarea                       [x]
 - Editar tarea                      []
 - Editar projecto                   [x]
 - Eliminar projecto                 [x]
 - Eliminar Tarea                    []
-- Consultar tarea de un proyecto    []
+- Consultar tarea de un proyecto    [x]
 - COnsultar proyectos de un usuario [x]
 
 ### 1.1
