@@ -3,20 +3,20 @@
 
 ### 1.0
 
-- Login
-- Register
-- Crear projecto
-- Crear tarea
-- Editar tarea
-- Editar projecto
-- Elominar projecto
-- Eliminar Tarea
-- Consultar tarea de un proyecto
-- COnsultar proyectos de un usuario
+- Login                             [x]
+- Register                          [x]
+- Crear projecto                    [x]  
+- Crear tarea                       []
+- Editar tarea                      []
+- Editar projecto                   [x]
+- Eliminar projecto                 [x]
+- Eliminar Tarea                    []
+- Consultar tarea de un proyecto    []
+- COnsultar proyectos de un usuario [x]
 
 ### 1.1
 
-- Authenticacion con EJW
-- Mejoras en comprobaciones de modelos
+- Authenticacion con EJW               []
+- Mejoras en comprobaciones de modelos []
 
 ###
