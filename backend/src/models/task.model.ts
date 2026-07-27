@@ -45,3 +45,23 @@ export const taskCreateModel = async (
         }
     })
 }
+
+export const taskFindProjectModel = async (
+    projectId: number
+) =>{
+    //Este metodo solo regresa tareas que perteneces a un proyecto en concreto
+    return prisma.task.findMany({
+        where: {projectId},
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            status: true,
+            priority: true,
+            duedate: true
+        },
+        orderBy: {
+            duedate: "asc"
+        }
+    })
+}
