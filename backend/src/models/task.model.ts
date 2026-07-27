@@ -94,5 +94,12 @@ export const taskUpdateModel = async (
         where: {id},
         data
     })
+}
 
+export const taskDeleteModel = async (
+    id: number
+) =>{
+    return prisma.task.delete({
+        where: {id}
+    })
 }
