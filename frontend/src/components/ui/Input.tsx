@@ -14,7 +14,7 @@ function Input({
         <input
             type={type}
             placeholder={placeholder}
-            className="bg-neutral-100 border rounded-md text-sm block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+            className="bg-neutral-100 border rounded-md text-sm block w-full px-3 py-2.5 shadow-xs placeholder:text-body pb-1"
             required
         />
     )

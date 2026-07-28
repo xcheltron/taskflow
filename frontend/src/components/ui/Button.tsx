@@ -18,7 +18,7 @@ function Button({
     return (
         <button 
             type={type}
-            className={`${styles[color]} box-border border border-transparent rounded-md p-1 text-sm`}
+            className={`${styles[color]} box-border border border-transparent rounded-md p-1 text-md w-full hover:cursor-pointer`}
         >
             {children}
         </button>
