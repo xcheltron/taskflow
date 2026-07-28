@@ -1,9 +1,12 @@
+import LoginForm from "../features/auth/components/LoginForm"
+import AuthLayout from "../layouts/AuthLayout"
+
 function Login() {
     return (
         <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-            <h1 className="text-5xl font-bold text-white">
-                Login
-            </h1>
+            <AuthLayout>
+                <LoginForm/>
+            </AuthLayout>
         </div>
     )
 }
