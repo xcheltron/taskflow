@@ -1,10 +1,11 @@
+import RegisterForm from "../features/auth/components/RegisterForm"
+import AuthLayout from "../layouts/AuthLayout"
+
 function Register() {
     return (
-        <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-            <h1 className="text-5xl font-bold text-white">
-                Register
-            </h1>
-        </div>
+        <AuthLayout>
+            <RegisterForm/>
+        </AuthLayout>
     )
 }
 
