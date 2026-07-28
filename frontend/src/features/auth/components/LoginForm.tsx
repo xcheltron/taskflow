@@ -3,7 +3,6 @@ import Input from "../../../components/ui/Input"
 
 function LoginForm(){
     return (
-        <div className="min-h-screen bg-slate-900 flex items-center justify-center">
             <form>
                 <h5 className="text-xl font-semibold text-heading mb-6">TASKFLOW</h5>
                 <div className="mb-4">
@@ -23,7 +22,6 @@ function LoginForm(){
                 </div>
                 <Button type="submit" color="primary">Iniciar sesion</Button>
             </form>
-        </div>
     )
 }
 export default LoginForm
