@@ -19,7 +19,7 @@ function RegisterForm () {
                     <Input id="password" name="password" type="password" placeholder="*******"></Input>
                 </div>
                 <div className="pt-6">
-                    <Button type="submit" color="primary">Register</Button>
+                    <Button type="submit" color="ok">Register</Button>
                 </div>
                 <div className="flex justify-center gap-1 pt-4 text-xs">
                 <p>
