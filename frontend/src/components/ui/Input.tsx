@@ -1,8 +1,8 @@
 export interface InputProps {
     id: string,
     name: string, 
-    placeholder: string
-    type?: "email" | "password" | "text"
+    placeholder?: string
+    type?: "email" | "password" | "text" | "checkbox"
 }
 
 function Input({
