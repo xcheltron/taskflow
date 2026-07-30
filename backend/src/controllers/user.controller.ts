@@ -59,7 +59,7 @@ export const loginUser = async (
 
         return res.status(200).json({
             message: "Usuario encontrado",
-            usuario: user
+            usuario: {id: user.id, email: user.email, name: user.name}
         })
     } catch (error) {
         return res.status(500).json({message: "Error interno del servidor"})
