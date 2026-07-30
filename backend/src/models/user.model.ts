@@ -22,7 +22,8 @@ export const loginUserModel = async (
         select: {
             id: true,
             name: true,
-            password: true
+            password: true,
+            email: true
         }
     })
 }
