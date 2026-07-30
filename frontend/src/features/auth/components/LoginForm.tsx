@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 import Button from "../../../components/ui/Button"
 import Input from "../../../components/ui/Input"
 
 import { login }from "../services/authService"
+import { saveUser } from "../../../utils/storage"
 
 
 function LoginForm(){
 
-    console.log("login")
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -25,6 +26,10 @@ function LoginForm(){
         })
 
         console.log(response)
+
+        saveUser(response.usuario)
+        navigate('/home')
+        
 
     } catch (e) {
         console.error(e);
