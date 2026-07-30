@@ -29,6 +29,14 @@ export const projectSearchModel = async (userId:number) => {
     })
 }
 
+//traer la cantidad de pryectos que tiene un usuario
+export const projectCountModel = async (userId:number) => {
+    return await prisma.user.findMany({
+        where: {id: userId},
+        select: {_count: true}
+    })
+}
+
 export const projectUpdateModel = async (
     id_project: number,
     name?: string,
