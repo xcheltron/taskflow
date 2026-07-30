@@ -1,12 +1,36 @@
+import { useEffect, useState } from "react"
 import Card from "../../../components/ui/Card"
 
+import { getUser } from "../../../utils/storage"
+import { countProjects } from "../../projects/services/projectService"
+
 function HomeForm(){
+
+    const user = getUser()
+    const [totalProjects, setTotalProjects] = useState(0)
+
+    useEffect(() =>{
+        console.log("hola")
+        const loadProjects = async () => {
+            try {
+                const response = await countProjects(user)
+                console.log(response)
+                setTotalProjects(response.result[0]._count.projects)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        loadProjects()
+        
+    }, [])
+
     return (
         <div className="flex-3 flex-col items-center pt-8 px-8">
-            <h1 className="text-5xl font-bold">HOLA BIENVENIDO @Usuario</h1>
+            <h1 className="text-5xl font-bold">HOLA BIENVENIDO {user.name}</h1>
             <h3 className="text-2xl mt-3">Hoy tienes un total x tareas pendientes</h3>
             <div className="flex gap-6 mt-8 flex-wrap justify-center">
-                <Card title="Projects" content="3"/>
+                <Card title="Projects" content={String(totalProjects)} />
                 <Card title="Pending Tasks" content="12"/>
                 <Card title="Completed Today" content="5"/>
             </div>
