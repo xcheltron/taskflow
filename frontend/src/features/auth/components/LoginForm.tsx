@@ -1,19 +1,47 @@
 import { Link } from "react-router-dom"
+import { useState } from "react"
+
 import Button from "../../../components/ui/Button"
 import Input from "../../../components/ui/Input"
 
+import { login }from "../services/authService"
+
+
 function LoginForm(){
+
+    console.log("login")
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+
+    const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    try {
+        const response = await login({
+            email,
+            password
+        })
+
+        console.log(response)
+
+    } catch (e) {
+        console.error(e);
+    }
+}   
+
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h5 className="text-xl font-semibold text-heading mb-6">Sign in</h5>
                 <div className="mb-4">
                     <label htmlFor="email" className="block mb-1 text-md font-mono text-heading">Your email</label>
-                    <Input id="email" name="email" placeholder="example@email.com"></Input>
+                    <Input id="email" name="email" type="email" placeholder="example@email.com" value={email} onChange={(e) =>setEmail(e.target.value) }></Input>
                 </div>
                 <div>
                     <label htmlFor="password" className="block mb-1 text-md font-mono text-heading">Your password</label>
-                    <Input id="password" name="password" type="password" placeholder="*******"></Input>
+                    <Input id="password" name="password" type="password" placeholder="*******" value={password} onChange={(e) => setPassword(e.target.value)}></Input>
                 </div>
                 <div className="flex items-start my-6">
                     <div className="flex items-center">
