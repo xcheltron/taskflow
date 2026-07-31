@@ -55,7 +55,7 @@ function LoginForm(){
                     </div>
                     <a href="#" className="ms-auto text-sm font-medium text-fg-brand hover:underline text-blue-700">Lost Password?</a>
                 </div>
-                <Button type="submit" color="ok">Sign in</Button>
+                <Button id="SingIN" type="submit" color="ok">Sign in</Button>
             </form>
             <div className="flex justify-center gap-1 pt-4 text-xs">
                 <p>
