@@ -12,7 +12,7 @@ function AppRouter () {
             <Route path='/register' element={<Register/>}/>
             <Route path="/home" element={<Home/>}/>
             <Route path="/projects" element={<Projects/>}/>
-            <Route path="/tasks" element={<Tasks/>}/>
+            <Route path="/tasks/:id" element={<Tasks/>}/>
         </Routes>
     )
 }
