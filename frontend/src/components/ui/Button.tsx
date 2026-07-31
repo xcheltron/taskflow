@@ -1,5 +1,6 @@
 export interface ButtonProps {
     children: React.ReactNode
+    id: string
     type?: "button" | "submit" | "reset"
     color?: "ok" | "disable" | "delete" | "transparent"
     fullWidth?: boolean
