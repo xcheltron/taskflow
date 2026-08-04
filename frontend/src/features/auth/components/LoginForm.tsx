@@ -5,7 +5,7 @@ import Button from "../../../components/ui/Button"
 import Input from "../../../components/ui/Input"
 
 import { login }from "../services/authService"
-import { saveUser } from "../../../utils/storage"
+import { saveUser } from "../storage"
 
 
 function LoginForm(){

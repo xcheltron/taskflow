@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Card from "../../../components/ui/Card"
 
-import { getUser } from "../../../utils/storage"
+import { getUser } from "../storage"
 import { countProjects } from "../../projects/services/projectService"
 
 function HomeForm(){
