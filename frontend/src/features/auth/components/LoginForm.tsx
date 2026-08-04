@@ -6,12 +6,13 @@ import Input from "../../../components/ui/Input"
 
 import { login }from "../services/authService"
 import { saveUser } from "../storage"
+import { useAuth } from "../hooks/useAuth"
 
 
 function LoginForm(){
 
     const navigate = useNavigate()
-
+    const { setUser } = useAuth();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -28,6 +29,7 @@ function LoginForm(){
         console.log(response)
 
         saveUser(response.usuario)
+        setUser(response.usuario)
         navigate('/home')
         
 

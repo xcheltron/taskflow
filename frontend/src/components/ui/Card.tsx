@@ -1,17 +1,25 @@
 import Button from "./Button"
 
 export interface propsCardLayout{
-    idbuton: string
     title: string
     content: string
-    colorCard : "default" | "red" | "blue" | "yellow" | "gray" | "pink"
+    colorCard?: "default" | "red" | "blue" | "yellow" | "gray" | "pink"
+    idbuton?: string
     butonColor?: "ok" | "disable" | "delete"
     textButon?: string
     onClickCard?: () => void
     onClickButton?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-function Card(props: propsCardLayout) {
+function Card({title,
+    content,
+    colorCard = "default",
+    idbuton,
+    butonColor,
+    textButon,
+    onClickCard,
+    onClickButton,
+}: propsCardLayout) {
 
     const styles = {
         default: "bg-white-100",
@@ -24,19 +32,19 @@ function Card(props: propsCardLayout) {
     }
 
     return (
-        <div className={`${styles[props.colorCard]} w-72 h-60 p-6 border rounded-md shadow-xs flex flex-col justify-between hover:cursor-pointer hover:scale-105 transition-transform `} onClick={props.onClickCard}>
+        <div className={`${styles[colorCard]} w-72 h-60 p-6 border rounded-md shadow-xs flex flex-col justify-between hover:cursor-pointer hover:scale-105 transition-transform `} onClick={onClickCard}>
             <div>
                 <h5 className="mb-3 text-2xl font-semibold">
-                    {props.title}
+                    {title}
                 </h5>
 
                 <p className="text-body">
-                    {props.content}
+                    {content}
                 </p>
             </div>
-            {props.textButon && props.butonColor &&(            
-                <Button id={props.idbuton} type="submit" color={props.butonColor} onClick={props.onClickButton}>
-                    {props.textButon}
+            {textButon && butonColor &&(            
+                <Button id={idbuton} type="submit" color={butonColor} onClick={onClickButton}>
+                    {textButon}
                 </Button>
             )}
         </div>

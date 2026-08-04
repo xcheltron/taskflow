@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react"
 import Card from "../../../components/ui/Card"
+//import { user } from 
 
-import { getUser } from "../storage"
 import { countProjects } from "../../projects/services/projectService"
+import { useAuth } from "../hooks/useAuth"
 
 function HomeForm(){
 
-    const user = getUser()
+    const {user} = useAuth()
     const [totalProjects, setTotalProjects] = useState(0)
 
     useEffect(() =>{
         console.log("hola")
+        console.log(user)
         const loadProjects = async () => {
             try {
+
+                if (!user) return;
+
                 const response = await countProjects(user)
                 console.log(response)
                 setTotalProjects(response.result[0]._count.projects)
@@ -23,11 +28,11 @@ function HomeForm(){
 
         loadProjects()
         
-    }, [])
+    }, [user])
 
     return (
         <div className="flex-3 flex-col items-center pt-8 px-8">
-            <h1 className="text-5xl font-bold">HOLA BIENVENIDO {user.name}</h1>
+            <h1 className="text-5xl font-bold">HOLA BIENVENIDO {user?.name}</h1>
             <h3 className="text-2xl mt-3">Hoy tienes un total x tareas pendientes</h3>
             <div className="flex gap-6 mt-8 flex-wrap justify-center">
                 <Card title="Projects" content={String(totalProjects)} />
