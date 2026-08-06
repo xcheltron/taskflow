@@ -1,4 +1,4 @@
-import TaskForm from "../features/auth/components/TaskForm";
+import TaskForm from "../features/tasks/components/TaskForm";
 import MainLayout from "../layouts/MainLayout";
 
 function Tasks() {
