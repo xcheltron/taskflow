@@ -5,7 +5,7 @@ import { createTask, getTasks } from "../services/taskService"
 import type { task } from "../types"
 import TaskList from "./TaskList"
 import TaskTitle from "./TaskTitle"
-import Button from "../../../components/ui/Button"
+import TaskShowModal from "./TaskShowModal"
 
 function TaskForm() {
 
@@ -66,74 +66,20 @@ function TaskForm() {
             ))}
 
             {showModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-                    <div className="w-500px rounded-lg bg-white p-6 shadow-lg">
+                <TaskShowModal
+                    title={title}
+                    description={description}
+                    priority={priority}
+                    dueDate={dueDate}
 
-                        <h2 className="mb-4 text-2xl font-bold">
-                            New Task
-                        </h2>
+                    setTitle={setTitle}
+                    setDescription={setDescription}
+                    setPriority={setPriority}
+                    setDueDate={setDueDate}
 
-                        <input
-                            value={title}
-                            type="text"
-                            placeholder="Title"
-                            className="mb-4 w-full rounded border p-2"
-                            onChange={(e) => {setTitle(e.target.value)}}
-                        />
-
-                        <textarea
-                            value={description}
-                            placeholder="Description"
-                            className="mb-4 w-full rounded border p-2"
-                            onChange={(e) => {setDescription(e.target.value)}}
-                        />
-
-                        <div className="mb-4">
-                            <label className="mb-1 block font-medium">
-                                Priority
-                            </label>
-
-                            <select
-                                value={priority}
-                                onChange={(e) =>
-                                    setPriority(e.target.value as "LOW" | "MEDIUM" | "HIGH")
-                                }
-                                className="w-full rounded border p-2"
-                            >
-                                <option value="LOW">Low</option>
-                                <option value="MEDIUM">Medium</option>
-                                <option value="HIGH">High</option>
-                            </select>
-                        </div>
-
-                        <div className="mb-4">
-                            <label className="mb-1 block font-medium">
-                                Due Date
-                            </label>
-
-                            <input
-                                type="date"
-                                value={dueDate}
-                                onChange={(e) => setDueDate(e.target.value)}
-                                className="w-full rounded border p-2"
-                            />
-                        </div>
-
-                        <div className="flex justify-end gap-3">
-                            <Button
-                                id="CancelTask" type="button" color="delete" fullWidth={false} onClick={() => setShowModal(false)}
-                            >
-                                Cancel
-                            </Button>
-
-                            <Button
-                                id="newTask" type="submit" color="ok" fullWidth={false} onClick={()=> {handleNewTask()}}
-                            >
-                                Save
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+                    onCancel={() => setShowModal(false)}
+                    onSave={handleNewTask}
+                />
             )}
         </div>
     )
