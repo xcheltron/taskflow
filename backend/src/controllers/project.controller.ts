@@ -2,7 +2,6 @@ import { projectCreateModel } from "../models/project.model.js";
 import { projectSearchModel } from "../models/project.model.js";
 import { projectUpdateModel } from "../models/project.model.js";
 import { projectDeleteModel } from "../models/project.model.js";
-import { projectCountModel } from "../models/project.model.js";
 
 import  type { Request, Response} from "express"
 
@@ -52,33 +51,6 @@ export const projectSearchController = async (
     }
 }
 
-export const projectCountController = async (
-    req: Request,
-    res: Response
-) => {
-    try {
-        const userId = Number(req.params.id)
-
-        if (isNaN(userId)){
-            return res.status(400).json({
-                message: "id no valido"
-            })
-        }
-
-        const result = await projectCountModel(userId)
-
-        return res.status(200).json({
-            message: "Conteo realizado con exito",
-            result: result
-        })
-
-    } catch (error) {
-        console.error(error)
-        return res.status(500).json({message: "Error interno del servidor"})
-    }
-
-
-}
 
 export const projectUpdateController = async (
     req: Request,
