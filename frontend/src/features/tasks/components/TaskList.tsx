@@ -4,13 +4,14 @@ export interface taskListProps {
     title: string
     priority: "LOW" | "MEDIUM" | "HIGH"
     description?: string | null
-
+    onDelete: () => void
 }
 
 function TaskList ({
     title,
     description,
-    priority
+    priority,
+    onDelete
 }:taskListProps) {
     
     const priorityColor = {
@@ -38,7 +39,7 @@ function TaskList ({
                 <div className="flex items-center gap-4">
                     <div className={`size-4 rounded-full ${priorityColor[priority]}`} />
 
-                        <Button id="basura" color="transparent" fullWidth={false}>
+                        <Button id="basura" color="transparent" fullWidth={false} onClick={onDelete}>
                             🗑
                         </Button>
                     </div>
