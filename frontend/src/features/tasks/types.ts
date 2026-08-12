@@ -2,6 +2,10 @@ export interface getTasksData{
     id:number
 }
 
+export interface deleteTasksData{
+    id:number
+}
+
 export interface task{
     id: number
     title: string
