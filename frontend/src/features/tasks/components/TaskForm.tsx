@@ -1,7 +1,8 @@
+//Imports
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { createTask, getTasks } from "../services/taskService"
+import { createTask, getTasks, deleteTask } from "../services/taskService"
 import type { task } from "../types"
 import TaskList from "./TaskList"
 import TaskTitle from "./TaskTitle"
@@ -23,6 +24,7 @@ function TaskForm() {
     const projectProps = location.state
     const {id} = useParams()
 
+    //Metodo que carga la lista actualizada de tareas
     const loadTasks = async ()=>{
             try {
                 const response = await getTasks({id: Number(id)})
@@ -37,10 +39,12 @@ function TaskForm() {
         loadTasks()
     },[])
 
+    //Metodo para hace aparecer el showModal
     const handleClick = () =>{
         setShowModal(true)
     } 
 
+    //Metodo para crear una nueva tarea
     const handleNewTask = async () =>{
         try {
             const response = await createTask( 
@@ -57,12 +61,21 @@ function TaskForm() {
         setShowModal(false)
     }
 
+    const handleDeleteTask = async (taskId: number) => {
+        try {
+            await deleteTask({id: taskId}) 
+            await loadTasks()
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <div className="flex flex-col p-6 pl-8">
             <TaskTitle name={projectProps.name} description={projectProps.description} onClick={() => {handleClick()}}/>
             {/* Lista de tareas */}
             {tasks.map((t: task) =>(
-                <TaskList title={t.title} description={t.description} priority={t.priority}></TaskList>
+                <TaskList key={t.id} title={t.title} description={t.description} priority={t.priority} onDelete={()=>handleDeleteTask(Number(t.id))}></TaskList>
             ))}
 
             {showModal && (
