@@ -1,6 +1,6 @@
 import Card from "../../../components/ui/Card"
 import Button from "../../../components/ui/Button"
-import { getUser } from "../storage"
+import { getUser } from "../../auth/storage"
 import { useEffect, useState } from "react"
 import { getProjects } from "../../projects/services/projectService"
 import { useNavigate } from "react-router-dom"
