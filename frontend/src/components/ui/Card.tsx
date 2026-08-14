@@ -22,12 +22,12 @@ function Card({title,
 }: propsCardLayout) {
 
     const styles = {
-        default: "bg-white-100",
-        red: "bg-red-600",
-        blue: "bg-blue-700 hover:bg-blue-800",
-        yellow: "bg-yellow-600",
-        gray: "bg-gray-600",
-        pink: "bg-pink-600"
+        default: "bg-white-100 hover:bg-gray-100",
+        red: "bg-red-600 text-white hover:bg-red-800",
+        blue: "bg-blue-600 text-white hover:bg-blue-800",
+        yellow: "bg-yellow-600 text-white hover:bg-yellow-800",
+        gray: "bg-gray-600 text-white hover:bg-gray-800",
+        pink: "bg-pink-300 text-white hover:bg-pink-600"
 
     }
 
@@ -43,7 +43,10 @@ function Card({title,
                 </p>
             </div>
             {textButon && butonColor &&(            
-                <Button id={idbuton} type="submit" color={butonColor} onClick={onClickButton}>
+                <Button id={idbuton} type="submit" color={butonColor} onClick={(event) => {
+                    event.stopPropagation()
+                    onClickButton?.(event)
+                }}>
                     {textButon}
                 </Button>
             )}

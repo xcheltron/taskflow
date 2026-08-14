@@ -2,7 +2,7 @@ import Card from "../../../components/ui/Card"
 import Button from "../../../components/ui/Button"
 import { getUser } from "../../auth/storage"
 import { useEffect, useState } from "react"
-import { getProjects, newProject } from "../../projects/services/projectService"
+import { deleteProject, getProjects, newProject } from "../../projects/services/projectService"
 import { useNavigate } from "react-router-dom"
 import type { project } from "../types"
 import ProjectShowModal from "./ProjectShowModal"
@@ -60,6 +60,17 @@ function ProjectForm (){
         setShowModal(false)
     }
 
+    const handleDeleteProject = async (project: project) =>{
+        try {
+            const id = project.id_project
+            const response = await deleteProject({id:id})
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+        loadProjectsUser()
+    }
+
     return(
         <div className="flex flex-col p-6 pl-8">
             <div className="flex justify-between items-center">
@@ -68,7 +79,16 @@ function ProjectForm (){
             </div>
             <div className="flex flex-wrap gap-4">
                 {projects.map((p: project) =>(
-                    <Card key={p.id_project} onClickCard={() => handleCLick(p)} title={p.name} content={p.description} butonColor="delete" textButon="Delete" colorCard={p.color} idbuton={String(p.id_project)}></Card>
+                    <Card 
+                        key={p.id_project} 
+                        onClickCard={() => handleCLick(p)}
+                        onClickButton={() => handleDeleteProject(p)} 
+                        title={p.name} content={p.description} 
+                        butonColor="delete" 
+                        textButon="Delete" 
+                        colorCard={p.color} 
+                        idbuton={String(p.id_project)}>
+                    </Card>
                 ))}
             </div> 
             {showModal && (

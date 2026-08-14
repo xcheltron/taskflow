@@ -10,6 +10,10 @@ export interface getProjectsTypes {
     id: number
 }
 
+export interface deleteProjectsData {
+    id: number
+}
+
 export interface project{
     id_project: number
     name: string
