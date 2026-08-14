@@ -1,17 +1,22 @@
 import Button from "../../../components/ui/Button"
+import type { ChangeEvent } from "react"
 
 export interface taskListProps {
     title: string
     priority: "LOW" | "MEDIUM" | "HIGH"
     description?: string | null
+    status: "PENDING" | "COMPLETED"
     onDelete: () => void
+    onSave: (completed: boolean) => void 
 }
 
 function TaskList ({
     title,
     description,
     priority,
-    onDelete
+    status,
+    onDelete,
+    onSave
 }:taskListProps) {
     
     const priorityColor = {
@@ -23,7 +28,7 @@ function TaskList ({
         <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between border-b py-4">
                 <div className="flex items-center gap-4">
-                    <input type="checkbox" className="mt-1 size-6" />
+                    <input type="checkbox" className="mt-1 size-6" checked={status === "COMPLETED"} onChange={(e: ChangeEvent<HTMLInputElement>)=> onSave(e.target.checked)}/>
                         <div>
                             <label className="text-xl">
                                 {title}
