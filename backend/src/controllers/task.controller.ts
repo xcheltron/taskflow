@@ -48,13 +48,13 @@ export const taskUpdateController = async (
 ) =>{
     try {
         const id = Number(req.params.id)
-        const { title, description, status, priority, duedate} = req.body
+        const { title, description, status, priority, duedate, completedAt} = req.body
 
         if (isNaN(id)){
             return res.status(400).json({message: "Id no valido"})
         }
 
-        const result = await taskUpdateModel(id, title, description, status, priority, duedate)
+        const result = await taskUpdateModel(id, title, description, status, priority, duedate, completedAt)
 
         if(!result){
             return res.status(400).json({message: "NO se realizo ninguna actualización, por favor compruebe la informacion"})
