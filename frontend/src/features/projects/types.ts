@@ -16,3 +16,10 @@ export interface project{
     description: string
     color: "default" | "red" | "blue" | "yellow" | "gray" | "pink"
 }
+
+export interface newProjectData{
+    userId: number
+    name: string
+    color: "default" | "red" | "blue" | "yellow" | "gray" | "pink"
+    description?: string 
+}
