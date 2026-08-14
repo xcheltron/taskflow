@@ -1,5 +1,5 @@
 import api from "../../../api/axios";
-import type { getTasksData, createTaskData, deleteTasksData } from "../types";
+import type { getTasksData, createTaskData, deleteTasksData, updateTaskData } from "../types";
 
 export const getTasks = async (data: getTasksData) => {
     const response = await api.get(`tasks/find/${data.id}`)
@@ -14,4 +14,9 @@ export const createTask = async (data:createTaskData)=> {
 export const deleteTask = async (data: deleteTasksData)=> {
     const response = await api.delete(`tasks/delete/${data.id}`)
     return response.data
+}
+
+export const updateTask = async (id:number, data: updateTaskData) => {
+    const responese = await api.put(`tasks/update/${id}`, data)
+    return responese.data
 }
