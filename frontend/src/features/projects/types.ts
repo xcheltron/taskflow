@@ -9,3 +9,10 @@ export interface countTaskData{
 export interface getProjectsTypes {
     id: number
 }
+
+export interface project{
+    id_project: number
+    name: string
+    description: string
+    color: "default" | "red" | "blue" | "yellow" | "gray" | "pink"
+}

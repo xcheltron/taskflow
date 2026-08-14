@@ -4,15 +4,9 @@ import { getUser } from "../../auth/storage"
 import { useEffect, useState } from "react"
 import { getProjects } from "../../projects/services/projectService"
 import { useNavigate } from "react-router-dom"
+import type { project } from "../types"
 
 function ProjectForm (){
-
-    interface project{
-        id_project: number
-        name: string
-        description: string
-        color: "default" | "red" | "blue" | "yellow" | "gray" | "pink"
-    }
 
     const navigate = useNavigate()
     const user = getUser()
