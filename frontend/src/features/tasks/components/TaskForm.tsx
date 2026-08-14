@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { createTask, getTasks, deleteTask } from "../services/taskService"
+import { createTask, getTasks, deleteTask, updateTask } from "../services/taskService"
 import type { task } from "../types"
 import TaskList from "./TaskList"
 import TaskTitle from "./TaskTitle"
@@ -70,12 +70,33 @@ function TaskForm() {
         }
     }
 
+    const handleSaveTask = async (id: number, completed: boolean) => {
+    try {
+        await updateTask(id, {
+            status: completed ? "COMPLETED" : "PENDING",
+            completedAt: completed ? new Date() : null
+        })
+
+        await loadTasks()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
     return (
         <div className="flex flex-col p-6 pl-8">
             <TaskTitle name={projectProps.name} description={projectProps.description} onClick={() => {handleClick()}}/>
             {/* Lista de tareas */}
             {tasks.map((t: task) =>(
-                <TaskList key={t.id} title={t.title} description={t.description} priority={t.priority} onDelete={()=>handleDeleteTask(Number(t.id))}></TaskList>
+                <TaskList 
+                    key={t.id} 
+                    title={t.title} 
+                    description={t.description} 
+                    priority={t.priority} 
+                    status={t.status}
+                    onSave={(completed) => handleSaveTask(Number(t.id), completed)} 
+                    onDelete={()=>handleDeleteTask(Number(t.id))}>   
+                </TaskList>
             ))}
 
             {showModal && (
