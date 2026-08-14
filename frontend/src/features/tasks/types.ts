@@ -6,6 +6,15 @@ export interface deleteTasksData{
     id:number
 }
 
+export interface updateTaskData{
+    title?: string,
+    description?: string,
+    status?: "COMPLETED" | "PENDING",
+    priority?: "LOW" | "MEDIUM" | "HIGH",
+    duedate?: Date,
+    completedAt?: Date | null
+}
+
 export interface task{
     id: number
     title: string
