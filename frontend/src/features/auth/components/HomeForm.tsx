@@ -4,17 +4,17 @@ import Card from "../../../components/ui/Card"
 
 import { countProjects, countTasks } from "../../projects/services/projectService"
 import { useAuth } from "../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 function HomeForm(){
 
+    const navigate = useNavigate()
     const {user} = useAuth()
     const [totalProjects, setTotalProjects] = useState(0)
     const [totalTask, setTotalTasks] = useState(0)
 
 
     useEffect(() =>{
-        console.log("hola")
-        console.log(user)
         const loadDashBoard = async () => {
             try {
 
@@ -34,12 +34,16 @@ function HomeForm(){
         
     }, [user])
 
+    const handleNavigateProjects = async () => {
+        navigate('../projects')
+    }
+
     return (
         <div className="flex-3 flex-col items-center pt-8 px-8">
             <h1 className="text-5xl font-bold">HOLA BIENVENIDO {user?.name}</h1>
             <h3 className="text-2xl mt-3">Hoy tienes un total {totalTask} de tareas pendientes</h3>
             <div className="flex gap-6 mt-8 flex-wrap justify-center">
-                <Card title="Projects" content={String(totalProjects)} />
+                <Card title="Projects" content={String(totalProjects)} onClickCard={() => handleNavigateProjects()} />
                 <Card title="Pending Tasks" content={String(totalTask)}/>
                 <Card title="Completed Today" content="5"/>
             </div>
