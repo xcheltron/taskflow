@@ -1,4 +1,4 @@
-import ProjectForm from "../features/auth/components/ProjectForm";
+import ProjectForm from "../features/projects/components/ProjectForm";
 import MainLayout from "../layouts/MainLayout";
 
 function Projects () {
