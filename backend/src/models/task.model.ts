@@ -72,7 +72,8 @@ export const taskUpdateModel = async (
     description?: string,
     status?: TaskStatus,
     priority?: Priority,
-    duedate?: Date 
+    duedate?: Date,
+    completedAt?: Date | null  
 ) =>{
     //verifiquemos que la tarea exista
     const result = await prisma.task.findUnique({
@@ -89,6 +90,8 @@ export const taskUpdateModel = async (
     if (status !== undefined) data.status = status
     if (priority !== undefined) data.priority = priority
     if (duedate !== undefined) data.duedate = duedate
+    if (completedAt !== undefined) data.completedAt = completedAt
+
 
     return prisma.task.update({
         where: {id},
